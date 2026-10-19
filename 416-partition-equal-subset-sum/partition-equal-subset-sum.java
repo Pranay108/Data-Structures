@@ -10,12 +10,15 @@ class Solution {
         if(nums[idx]<=target){
             pick = solve(nums,target-nums[idx],idx-1,dp);
         }
-        if(pick || notPick) dp[idx][target] =1;
-        else{
-            dp[idx][target] =0;
-        }
-        return pick || notPick;
+        boolean result = pick || notPick;
 
+            if (result) {
+                dp[idx][target] = 1;
+            } else {
+                dp[idx][target] = 0;
+            }
+
+return result;
     }
     
     public boolean canPartition(int[] nums) {
