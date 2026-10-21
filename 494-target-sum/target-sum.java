@@ -1,29 +1,29 @@
-
 class Solution {
 
-    int solve(int[] nums, int target, int idx) {
+    int solve(int[] nums,  int idx, int currSum, int target) {
 
-        if (idx == 0) {
-            if (target == 0 && nums[0] == 0) {
-                return 2;
-            }
+        if (idx == nums.length) {
+    if (currSum == target) return 1;
+    else return 0;
+}
 
-            if (target == nums[0] || target == -nums[0]) {
-                return 1;
-            }
+int plus = solve(nums, idx + 1, currSum + nums[idx], target);
+int minus = solve(nums, idx + 1, currSum - nums[idx], target);
 
-            return 0;
-        }
-
-        int notPick = solve(nums, target + nums[idx], idx - 1);
-
-        int Pick = solve(nums, target - nums[idx], idx - 1);
-
-        return Pick + notPick;
+return plus + minus;
     }
 
     public int findTargetSumWays(int[] nums, int target) {
-        return solve(nums, target, nums.length - 1);
+        int sum = 0;
+        for(int i : nums){
+            sum += i;
+        }
+       int[][] dp = new int[nums.length][2 * sum + 1];
+
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
+       
+        return solve(nums,0 , 0 ,target);
     }
 }
-
