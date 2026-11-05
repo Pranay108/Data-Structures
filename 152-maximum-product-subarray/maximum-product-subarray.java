@@ -3,26 +3,23 @@ class Solution {
 
         int n = nums.length;
 
-        int prefix = 1;
-        int suffix = 1;
-        int answer = Integer.MIN_VALUE;
+        int pre = 1;
+        int suf = 1;
 
-        for (int i = 0; i < n; i++) {
+        int ans = Integer.MIN_VALUE;
 
-            if (prefix == 0) {
-                prefix = 1;
-            }
+        for(int i = 0; i < n; i++){
 
-            if (suffix == 0) {
-                suffix = 1;
-            }
+            if(pre == 0) pre = 1;
+            if(suf == 0) suf = 1;
 
-            prefix = prefix * nums[i];
-            suffix = suffix * nums[n - 1 - i];
+            pre = pre * nums[i];
 
-            answer = Math.max(answer, Math.max(prefix, suffix));
+            suf = suf * nums[n-i-1];
+
+            ans = Math.max(ans, Math.max(pre, suf));
         }
 
-        return answer;
+        return ans;
     }
 }
